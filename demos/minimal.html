@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>ZeroUpload Minimal Test</title>
+	<style>
+		body { font-family: Helvetica, sans-serif; }
+		#mydrop { width: 300px; height: 200px; border: 1px solid #888; }
+	</style>
+</head>
+<body>
+	<div id="mydrop" onClick="ZeroUpload.chooseFiles()">
+		Drop files here!  Or click to select!
+	</div>
+	<div id="results"></div>
+	<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script src="zeroupload.js"></script>
+	<script>
+		$(document).ready( function() {
+			ZeroUpload.setURL( 'upload.php' );
+			
+			ZeroUpload.on('complete', function(response) {
+				$('#results').html( '<h2>Upload Complete!</h2><pre>' + response.data + '</pre>' );
+			} );
+			
+			ZeroUpload.init();
+			ZeroUpload.addDropTarget( '#mydrop' );
+		} );
+	</script>
+</body>
+</html>

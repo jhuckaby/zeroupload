@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>ZeroUpload Test Page</title>
+	<style>
+		body { font-family: Helvetica, sans-serif; }
+		
+		#mydrop {
+			width: 300px;
+			height: 200px;
+			margin: 20px;
+			padding: 20px;
+			border: 1px solid #888;
+			background: #eee;
+			cursor: pointer;
+		}
+		
+		/* This class is automatically applied when files are hovered over your drop zones */
+		#mydrop.dragover {
+			box-shadow: #00f 0px 0px 8px 2px;
+		}
+	</style>
+	<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script src="zeroupload.js"></script>
+</head>
+<body>
+	<h1>ZeroUpload Test Page</h1>
+	
+	<div id="mydrop" onClick="ZeroUpload.chooseFiles()">
+		Drop files here!  Or click to select!
+	</div>
+		
+	<div id="results"></div>
+	
+	<script>
+		$(document).ready( function() {
+			
+			// Set our target URL
+			ZeroUpload.setURL( 'upload.php' );
+			
+			// Set the maximum upload size (should match your server-side limit)
+			ZeroUpload.setMaxBytes( 8 * 1024 * 1024 ); // 8 MB
+			
+			// Now let's define some event listeners...
+			
+			ZeroUpload.on( 'start', function(files, userData) {
+				// Upload has started
+				// `files` is an array of files queued for upload
+				// `userData` is your user data value, if applicable
+				$('#results').html( "Upload has started!" );
+			} );
+			
+			ZeroUpload.on('progress', function(progress, userData) {
+				// Upload is in progress.
+				// `progress.amount` is the upload progress from 0.0 to 1.0
+				// `progress.percent` is the textual percentage, e.g. "50%"
+				// 'userData' is your user data value, if applicable.
+				$('#results').html(
+					'<div><strong>Progress:</strong> ' + progress.percent + ', ' + 
+						progress.elapsedHuman + ' elapsed</div>' + 
+					'<div><strong>Sent:</strong> ' + progress.dataSentHuman + ' of ' + 
+						progress.dataTotalHuman + '(' + progress.dataRateHuman + ')</div>' + 
+					'<div><strong>Remaining:</strong> ' + progress.remainingTimeHuman + '</div>'
+				);
+			} );
+			
+			ZeroUpload.on('complete', function(response, userData) {
+				// Upload is complete!
+				// `response.code` is the HTTP response code, e.g. 200
+				// `response.data` is the raw data from the server
+				// 'userData' is your user data value, if applicable.
+				$('#results').html(
+					'<h2>Upload Complete!</h2>' + 
+					'<h3>Raw Server Response:</h3>' + 
+					'<pre>' + response.data + '</pre>' 
+				);
+			} );
+			
+			ZeroUpload.on('error', function(type, msg, userData) {
+				// An error occurred!
+				// 'type' will be one of the error IDs shown below.
+				// 'message' is the error description string.
+				// 'userData' is your user data value, if applicable.
+				$('#results').html( '<span style="font-weight:bold; color:red;">ERROR: [' + type + "]: " + msg + '</span>' );
+			} );
+			
+			// Initialize library
+			ZeroUpload.init();
+			
+			// Assign our drop target
+			ZeroUpload.addDropTarget( '#mydrop' );
+			
+		} );
+	</script>
+	
+</body>
+</html>
