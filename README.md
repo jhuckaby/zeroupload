@@ -4,7 +4,7 @@
 
 ZeroUpload is a small (~2.2K gzipped and minified) HTML5 / JavaScript library for uploading files.  It has an easy API to integrate with your web app, providing both drag & drop and click-to-select functionality.  You can also limit the file types, total size and number of files you allow.  The library handles all the details behind the scenes, emitting progress and completion events to your code, but it has no user interface at all.  The UI of your app is yours to design -- we just provide the hooks.
 
-[Check out a live demo here!](//pixlcore.com/demos/zeroupload/)
+[Check out a live demo here!](http://pixlcore.com/demos/zeroupload/)
 
 ## QuickStart Guide
 
@@ -184,7 +184,7 @@ You can provide visual feedback when the user is hovering files over your drop z
 	}
 ```
 
-This will make all drop zones glow blue when files are hovered over them.  This is the same effect used in the [demo test page](//pixlcore.com/demos/zeroupload/).
+This will make all drop zones glow blue when files are hovered over them.  This is the same effect used in the [demo test page](http://pixlcore.com/demos/zeroupload/).
 
 ## Events
 
