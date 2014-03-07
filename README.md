@@ -10,7 +10,7 @@ ZeroUpload is a small (~2.2K gzipped and minified) HTML5 / JavaScript library fo
 
 WebcamJS is open source, MIT licensed, and available on GitHub:
 
-[https://github.com/jhuckaby/webcamjs](https://github.com/jhuckaby/webcamjs)
+https://github.com/jhuckaby/webcamjs
 
 ## QuickStart Guide
 
