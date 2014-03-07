@@ -4,19 +4,19 @@
 
 ZeroUpload is a small (~2.2K gzipped and minified) HTML5 / JavaScript library for uploading files.  It has an easy API to integrate with your web app, providing both drag & drop and click-to-select functionality.  You can also limit the file types, total size and number of files you allow.  The library handles all the details behind the scenes, emitting progress and completion events to your code, but it has no user interface at all.  The UI of your app is yours to design -- we just provide the hooks.
 
-[Check out a live demo here!](http://pixlcore.com/demos/zeroupload/)
+[Check out a live demo here!](//pixlcore.com/demos/zeroupload/)
 
 ## QuickStart Guide
 
 Grab the `zeroupload.js` file and host it on your server.  Here is a minimal example implementation:
 
 ```html
+	<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script src="zeroupload.js"></script>
+	
 	<div id="mydrop" onClick="ZeroUpload.chooseFiles()">
 		Drop files here!  Or click to select!
 	</div>
-	
-	<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
-	<script src="zeroupload.js"></script>
 	
 	<script>
 		$(document).ready( function() {
@@ -46,7 +46,7 @@ In your server-side code, the file(s) will arrive as standard HTTP POST file upl
 
 ## Prerequisites
 
-ZeroUpload relies on jQuery.  You can get it from [jQuery.com](http://jquery.com).  Any modern version should work fine, v1.6 or later.
+ZeroUpload relies on jQuery.  You can get it for free from [jQuery.com](http://jquery.com).  Any modern version should work fine, v1.6 or later.
 
 If you are already using another library that conflicts with jQuery (i.e. one that reserves the global `$` variable), you may call `jQuery.noConflict()` and ZeroUpload will still work fine.
 
@@ -75,7 +75,7 @@ If a limit is set and the user drops too many files, an error is generated (see 
 By default ZeroUpload allows files of any size to be uploaded.  To enforce a size limit, call the `ZeroUpload.setMaxBytes()` function, and pass in an integer representing the maximum number of bytes to allow.  Note that this is measured as all files together, and is not a per-file limit.  Example:
 
 ```javascript
-	ZeroUpload.setMaxBytes( 8192 * 1024 * 1024 ); // 8 MB
+	ZeroUpload.setMaxBytes( 8 * 1024 * 1024 ); // 8 MB
 ```
 
 **Note:** Do not rely on a client-side max file size limitation to protect your server from attacks.  Such limits can easily be overridden via JavaScript bookmarklets, etc. Please make sure to always enforce file upload size limits in your server-side code.
@@ -100,7 +100,7 @@ After setting your options (see above), you should initialize the ZeroUpload lib
 
 ## Specifying Drop Targets
 
-To use ZeroUpload for drag n' drop style file uploads, you have to declare one or more drop targets.  These are areas of your page that accept user file drops.  You can activate drops on any block element such as a DIV, or just enable them on your entire document.  Either way, the function to call is `ZeroUpload.addDropTarget()`.  Pass in any CSS selector or DOM element (anything jQuery can grok).  Example:
+To use ZeroUpload for drag n' drop style file uploads, you have to declare one or more drop targets.  These are areas of your page that accept user file drops.  You can activate drops on any block element such as a DIV, or your entire body element.  Either way, the function to call is `ZeroUpload.addDropTarget()`.  Pass in any CSS selector or DOM element (anything jQuery can grok).  Example:
 
 ```javascript
 	ZeroUpload.addDropTarget( "#mydroparea" );
@@ -140,7 +140,7 @@ Each time you call `chooseFiles()`, you may specify a customized target URL, que
 
 ZeroUpload is implemented as a singleton, meaning there can only be one instance per web page.  However, you can customize the target URL, query params, and/or include user data for each drop target, and each call to `chooseFiles()`.
 
-For customizing via drop targets, the `addDropTarget()` function accepts two additional arguments after the CSS selector.  The first one can be a string, which overrides the target URL for uploads, or a hash, which gets serialized into query params on the existing URL set via `setURL()`.  Example of this:
+For customizing via drop targets, the `addDropTarget()` function accepts two additional arguments after the CSS selector.  The first one can be a string, which overrides the target URL for uploads, or a hash, which gets serialized into query params on the existing URL set via `setURL()`.  Here are examples of these:
 
 ```javascript
 	// first, set a default target URL
@@ -176,7 +176,7 @@ This way you can provide your callback functions with information as to how the 
 
 ## Styling the Drag Hover
 
-You can provide visual feedback when the user is hovering files over your drop zones, via CSS classes.  ZeroUpload will add a `dragover` class to any drop zone DOM elements where the mouse is hovering with files in tow.  To take advantage of this, simply define a `dragover` CSS class which contains the effects you want.  Here is an example:
+You can provide visual feedback when the user is hovering files over your drop zones, via CSS.  ZeroUpload will add a `dragover` class to any drop zone DOM elements where the mouse is hovering with files in tow.  To take advantage of this, simply define a `dragover` CSS class which contains the effects you want.  Here is an example:
 
 ```css
 	.dragover {
@@ -184,11 +184,11 @@ You can provide visual feedback when the user is hovering files over your drop z
 	}
 ```
 
-This will make all drop zones glow blue when files are hovered over them.  This is the same effect used in the demo test page.
+This will make all drop zones glow blue when files are hovered over them.  This is the same effect used in the [demo test page](//pixlcore.com/demos/zeroupload/).
 
 ## Events
 
-ZeroUpload fires a number of events in response to actions taking place.  You can catch these events and execute custom code, such as displaying an upload progress indicator, and a completion notice.  To hook events, use the `ZeroUpload.on()` function, and pass in an event name, and a callback function.  Here are all the events you can listen in on:
+ZeroUpload fires a number of events in response to various actions taking place.  You can catch these events and execute custom code, such as displaying an upload progress indicator, a completion notice, and/or an error dialog.  To hook events, use the `ZeroUpload.on()` function, and pass in an event name, and a callback function.  Here are all the events you can listen in on:
 
 ### Start Event
 
