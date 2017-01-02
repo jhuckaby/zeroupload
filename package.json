@@ -1,0 +1,20 @@
+{
+  "name": "zeroupload",
+  "version": "1.0.0",
+  "description": "HTML5 file upload library with zero interface.",
+  "main": "zeroupload.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhuckaby/zeroupload.git"
+  },
+  "keywords": [
+    "html5",
+    "upload"
+  ],
+  "author": "Joseph Huckaby",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jhuckaby/zeroupload/issues"
+  },
+  "homepage": "https://github.com/jhuckaby/zeroupload#readme"
+}
